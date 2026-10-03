@@ -1,0 +1,103 @@
+/* --------------------------------------------------------------------------
+   PAGE CONTROVERSE (bibliographie commentée)
+   Chargée après main.css : les valeurs ci-dessous complètent et priment sur
+   la règle générique `.controverse-texte` de main.css.
+   -------------------------------------------------------------------------- */
+
+/* Conteneur principal du texte */
+.controverse-texte
+{
+	font-size: clamp(30px, 5vw, 72px);
+	max-width: 1300px;
+	margin: 120px auto 60px;
+	padding: 0 20px;
+}
+
+/* Titres de section (Problématique, Présentation, Bibliographie, Conclusion) */
+.controverse-texte h1
+{
+	font-size: clamp(35px, 7vw, 45px);
+	margin-bottom: 20px;
+	text-align: center;
+	border-bottom: 2px solid var(--color-accent);
+	display: inline-block;
+	padding-bottom: 10px;
+}
+
+.controverse-texte section
+{
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.controverse-texte p
+{
+	margin-left: 15px;
+	margin-right: 15px;
+	font-size: clamp(17px, 2vw, 20px);
+	line-height: 1.8;
+	margin-bottom: 2rem;
+	text-align: justify;
+	width: 100%;
+}
+
+.problematique-box
+{
+	text-align: center;
+	border-radius: 0 15px 15px 0;
+	border-left: 4px solid var(--color-accent);
+	font-size: clamp(22px, 2vw, 25px);
+	font-weight: bold;
+	margin-bottom: 40px;
+	padding: 15px 20px;
+	background: var(--color-surface);
+	width: 100%;
+}
+
+/* Titre de chaque source */
+.controverse-texte h2
+{
+	font-size: clamp(17px, 2vw, 20px);
+	margin-top: 40px;
+	margin-bottom: 20px;
+	font-weight: 700;
+	text-align: left;
+	width: 100%;
+	border-left: 4px solid var(--color-text);
+	padding-left: 15px;
+}
+
+.source-item
+{
+	background: var(--color-surface);
+	padding: 30px;
+	border-radius: 12px;
+	margin-bottom: 40px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* La fiche entière est cliquable : `a` sans boîte pour ne pas casser la mise
+   en page, le focus clavier est porté par .source-item (voir main.css). */
+.source-item:hover
+{
+	background-color: var(--color-surface-strong);
+	transform: scale(1.01);
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.bloc-lien
+{
+	text-decoration: none;
+	color: inherit;
+	display: contents;
+}
+
+/* Décalage de hauteur lors du défilement vers les ancres de la page */
+#intro, #s1, #s2, #s3, #s4, #s5, #s6, #conclusion
+{
+	scroll-margin-top: 30px;
+}

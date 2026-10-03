@@ -1,0 +1,366 @@
+/* ==========================================================================
+   FEUILLES DE STYLE PARTAGÉES PAR TOUTES LES PAGES
+   Ordre de chargement recommandé : menus.css -> main.css -> css de page
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   PALETTE (variables CSS partagées par les feuilles de page)
+   -------------------------------------------------------------------------- */
+:root
+{
+	--color-background: #dbd3bd;
+	--color-surface: rgba(255, 255, 255, 0.4);
+	--color-surface-strong: rgba(255, 255, 255, 0.6);
+	--color-text: #1a1a1a;
+	--color-text-light: #4a4a40;
+	--color-border: #c7bca1;
+	--color-accent: #d4ff00;
+	--color-nav-backdrop: rgba(199, 188, 161, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   POLICES (auto-hébergées dans /font pour un fonctionnement hors ligne)
+   Une déclaration @font-face par combinaison graisse / style.
+   -------------------------------------------------------------------------- */
+@font-face
+{
+	font-family: "PT_Serif";
+	src: url("../font/PT_Serif/PTSerif-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face
+{
+	font-family: "PT_Serif";
+	src: url("../font/PT_Serif/PTSerif-Italic.ttf") format("truetype");
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face
+{
+	font-family: "PT_Serif";
+	src: url("../font/PT_Serif/PTSerif-Bold.ttf") format("truetype");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face
+{
+	font-family: "PT_Serif";
+	src: url("../font/PT_Serif/PTSerif-BoldItalic.ttf") format("truetype");
+	font-weight: 700;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face
+{
+	font-family: "Exo";
+	src: url("../font/Exo/Exo-VariableFont_wght.ttf") format("truetype");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face
+{
+	font-family: "Exo";
+	src: url("../font/Exo/Exo-Italic-VariableFont_wght.ttf") format("truetype");
+	font-weight: 100 900;
+	font-style: italic;
+	font-display: swap;
+}
+
+/* --------------------------------------------------------------------------
+   BASE
+   -------------------------------------------------------------------------- */
+html
+{
+	scroll-behavior: smooth;
+	scroll-padding-top: 70px;
+}
+
+body
+{
+	font-family: PT_Serif, Georgia, serif;
+	margin: 0;
+	padding: 0;
+	padding-top: 100px;
+	background-color: var(--color-background);
+	color: var(--color-text);
+}
+
+h1, h2, h3, h4
+{
+	font-family: Exo, PT_Serif, Georgia, serif;
+	color: var(--color-text);
+}
+
+/* Contenu réservé aux lecteurs d'écran (titres de page, libellés) */
+.visually-hidden
+{
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Lien d'évitement : masqué tant qu'il n'a pas le focus clavier.
+  doit être le premier élément focusable de la page. */
+.skip-link
+{
+	position: absolute;
+	top: -100px;
+	left: 10px;
+	z-index: 2000;
+	padding: 10px 16px;
+	background: var(--color-accent);
+	color: #000;
+	font-weight: 600;
+	text-decoration: none;
+	border-radius: 0 0 8px 8px;
+}
+
+.skip-link:focus
+{
+	top: 0;
+}
+
+/* Navigation au clavier : contours visibles sur tous les éléments interactifs */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+label:focus-visible
+{
+	outline: 3px solid var(--color-accent);
+	outline-offset: 3px;
+	border-radius: 4px;
+}
+
+/* Respect de l'option système « animations réduites » */
+@media (prefers-reduced-motion: reduce)
+{
+	html
+	{
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after
+	{
+		transition-duration: 0.01ms !important;
+		animation-duration: 0.01ms !important;
+	}
+}
+
+/* --------------------------------------------------------------------------
+   CONTENU PRINCIPAL
+   -------------------------------------------------------------------------- */
+main
+{
+	margin-right: 70px;
+	margin-left: 70px;
+}
+
+.controverse-texte
+{
+	margin-top: 250px;
+	font-size: clamp(12px, 4vw, 24px);
+	line-height: 1.8;
+	margin-bottom: 2rem;
+	text-align: center;
+	width: 100%;
+}
+
+.bouttons
+{
+	display: flex;
+	justify-content: center;
+}
+
+.decouvrir-btn
+{
+	background: var(--color-accent);
+	color: #000;
+	padding: 10px 16px;
+	border-radius: 50px;
+	border: none;
+	font-weight: 600;
+	font-size: clamp(12px, 2.5vw, 20px);
+	cursor: pointer;
+	display: inline-block;
+	transition: all 0.3s ease;
+	text-decoration: none;
+	margin-right: 40px;
+	margin-bottom: 310px;
+}
+
+.decouvrir-btn:hover
+{
+	transform: translateY(-2px);
+	box-shadow: 0 8px 20px rgba(212, 255, 0, 0.3);
+	color: #000;
+}
+
+/* Titre d'accueil : bloc ajusté à son contenu et centré dans la page
+   (équivalent de l'ancien inline-block, mais centrage garanti même
+   maintenant que l'élément est un <h1>). */
+.texte-stylisé
+{
+	font-family: "Limelight", Exo, sans-serif;
+	font-weight: 400;
+	text-align: center;
+	padding-bottom: 250px;
+	padding-top: 170px;
+	font-size: clamp(20px, 8vw, 90px);
+	display: block;
+	width: fit-content;
+	margin: 0 auto;
+	transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.texte-stylisé:hover
+{
+	transform: translateY(-1px) scale(1.001);
+	text-shadow: 0 4px 10px rgba(212, 255, 0, 0.3);
+}
+
+.fleche-btn
+{
+	font-size: 30px;
+	padding: 3px 15px;
+	background: var(--color-accent);
+	border-radius: 50%;
+	text-decoration: none;
+	color: #000;
+	transition: transform 0.3s ease;
+	display: inline-block;
+}
+
+.fleche-btn:hover
+{
+	transform: translateY(-1px) scale(1.001);
+	box-shadow: 0 4px 10px rgba(212, 255, 0, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px)
+{
+	nav
+	{
+		padding: 12px 20px;
+		flex-direction: column;
+		gap: 15px;
+	}
+
+	.nav-menu
+	{
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.timeline-container
+	{
+		padding: 0 20px;
+		flex-direction: column;
+	}
+
+	.timeline-large-text
+	{
+		font-size: 80px;
+	}
+
+	.timeline-image
+	{
+		width: 200px;
+		height: 200px;
+	}
+
+	.bouttons
+	{
+		flex-direction: row;
+		justify-content: center;
+		gap: 8px;
+		width: 100%;
+	}
+
+	.decouvrir-btn
+	{
+		margin-right: 0;
+		margin-bottom: 50px;
+		flex: 1;
+		max-width: fit-content;
+	}
+}
+
+/* --------------------------------------------------------------------------
+   PIED DE PAGE
+   -------------------------------------------------------------------------- */
+.site-footer
+{
+	padding: 12px 0;
+	text-align: center;
+	font-size: 0.75rem;
+	color: var(--color-text);
+	margin: 0;
+}
+
+.site-footer a
+{
+	color: var(--color-text);
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+}
+
+.site-footer a:hover
+{
+	border-bottom-color: var(--color-accent);
+}
+
+.site-footer .footer-separator
+{
+	margin: 0 6px;
+	opacity: 0.5;
+}
+
+/* --------------------------------------------------------------------------
+   DIVERS
+   -------------------------------------------------------------------------- */
+
+/* Couleur du surlignage */
+::selection
+{
+	background-color: #d8fd1c;
+	color: #000;
+}
+
+/* Décalage de hauteur lors du défilement vers l'ancre */
+#plusbas
+{
+	scroll-margin-top: 150px;
+}
+
+/* Focus visible sur les blocs de sources cliquables.
+   Le lien est en display:contents (pas de boîte) : c'est la fiche enfant
+   qui porte donc le contour. */
+.bloc-lien:focus-visible .source-item
+{
+	outline: 3px solid var(--color-accent);
+	outline-offset: 4px;
+}

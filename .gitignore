@@ -1,0 +1,14 @@
+# Fichiers et dossiers générés par les éditeurs (JetBrains / VS Code)
+/.idea/
+*.iml
+.vscode/
+
+# Fichiers temporaires du système
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Fichiers de sauvegarde /bourrage
+*.swp
+*~
+*.bak

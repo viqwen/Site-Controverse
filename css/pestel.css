@@ -1,0 +1,230 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.carousel-container {
+    margin: auto;
+    width: 90%;
+    max-width: 900px;
+    aspect-ratio: 3 / 2;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Les boutons radio du carrousel sont masqués visuellement mais restent
+   focusables au clavier (contrairement à display:none) et pilotables
+   par les <label for="...">. */
+.carousel-container input[type="radio"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.carousel-container input[type="radio"]:focus-visible + label {
+    outline: 3px solid #d4ff00;
+    outline-offset: 3px;
+    border-radius: 50%;
+}
+
+.carousel-inner {
+    display: flex;
+    width: 600%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2vw;
+    box-sizing: border-box;
+    /* Le texte est plus long que la hauteur du cadre sur plusieurs fiches :
+       on le rend défilable plutôt que de le tronquer silencieusement. */
+    overflow-y: auto;
+}
+
+.box h2 {
+    font-size: clamp(18px, 4vw, 40px); 
+    margin: 10px 0;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.box p {
+    font-size: clamp(12px, 2vw, 21px); 
+    margin: 10px 3vw;
+    line-height: 1.4;
+    text-align: justify;
+}
+
+
+/* Couleurs */
+.box1 { background: #8B4411; color: white; }
+.box2 { background: #AE6E4E; color: white; }
+.box3 { background: #CC9767; color: white; }
+.box4 { background: #C7AD7F; color: white; }
+.box5 { background: #A57A5A; color: white; }
+.box6 { background: #8F574D; color: white; }
+
+/* % de slide pour chaque partie */
+#slide1:checked ~ .carousel-inner { transform: translateX(0%); }
+#slide2:checked ~ .carousel-inner { transform: translateX(-16.66%); }
+#slide3:checked ~ .carousel-inner { transform: translateX(-33.33%); }
+#slide4:checked ~ .carousel-inner { transform: translateX(-50%); }
+#slide5:checked ~ .carousel-inner { transform: translateX(-66.66%); }
+#slide6:checked ~ .carousel-inner { transform: translateX(-83.33%); }
+
+
+/* GESTION DES FLÈCHES */
+/* `display: none` par défaut : seules les flèches de la slide active
+   sont affichées (règle #slideN:checked ~ .arrow-for-N plus bas). */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 50px;
+    height: 50px;
+    padding: 0;
+
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+
+    font-size: 24px;
+    color: white;
+    background: rgba(0,0,0,0.3);
+
+    cursor: pointer;
+    border-radius: 50%;
+    user-select: none;
+    display: none;
+    z-index: 100;
+    transition: background 0.3s;
+}
+
+#slide1:checked ~ .arrow-for-1,
+#slide2:checked ~ .arrow-for-2,
+#slide3:checked ~ .arrow-for-3,
+#slide4:checked ~ .arrow-for-4,
+#slide5:checked ~ .arrow-for-5,
+#slide6:checked ~ .arrow-for-6 { 
+    display: flex; 
+}
+
+.nav-arrow:hover { background: rgba(0,0,0,0.6); }
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/* Pointe de la flèche : triangle dessiné en CSS (aucun caractère spécial,
+   donc pas de dépendance à une police de symboles).
+   Le libellé textuel reste dans un span réservé aux lecteurs d'écran. */
+.nav-arrow::before
+{
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+}
+
+.nav-arrow.next::before
+{
+    border-left: 13px solid #ffffff;
+}
+
+.nav-arrow.prev::before
+{
+    border-right: 13px solid #ffffff;
+}
+
+
+/* GESTION DES POINTS */
+.dots {
+    position: absolute;
+    bottom: 2%;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+}
+
+.dot {
+    display: inline-block;
+    width: 1.2vw;
+    height: 1.2vw;
+    min-width: 8px;
+    min-height: 8px;
+    background: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#slide1:checked ~ .dots label[for="slide1"],
+#slide2:checked ~ .dots label[for="slide2"],
+#slide3:checked ~ .dots label[for="slide3"],
+#slide4:checked ~ .dots label[for="slide4"],
+#slide5:checked ~ .dots label[for="slide5"],
+#slide6:checked ~ .dots label[for="slide6"]{
+    background: rgba(0,0,0,0.6);
+    transform: scale(1.2);
+}
+
+/* RESPONSIVE MOBILE */
+@media screen and (max-width: 768px) {
+    .carousel-container {
+        width: 100%;
+        height: 80vh; 
+        max-height: none;
+        aspect-ratio: auto;
+        border-radius: 0; 
+    }
+
+    .box {
+        justify-content: flex-start;
+        /* Espace réservé en bas pour ne pas passer sous les flèches
+           et les points de navigation. */
+        padding-top: 40px;
+        padding-bottom: 70px;
+    }
+
+    .box h2 {
+        font-size: 24px;
+        margin-top: 20px;
+    }
+
+    .box p {
+        font-size: 16px;
+        margin: 10px 15px;
+    }
+    
+    .nav-arrow {
+        top: auto;
+        bottom: 10px; 
+        transform: none;
+    }
+    
+    .prev { left: 20px; }
+    .next { right: 20px; }
+    
+    .dots {
+        bottom: 25px; 
+    }
+    
+    .dot {
+        width: 12px;
+        height: 12px;
+    }
+}

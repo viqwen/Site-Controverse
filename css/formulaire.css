@@ -1,0 +1,135 @@
+
+/* FORMULAIRE DE CONTACT - QUESTIONNAIRE */
+.contact-form
+{
+	max-width: 600px;
+	margin: 60px auto;
+	padding: 40px;
+	background: rgba(255, 255, 255, 0.6);
+	border-radius: 12px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	font-family: Georgia, serif;
+}
+
+.contact-form p
+{
+	margin-bottom: 24px;
+	display: flex;
+	flex-direction: column;
+}
+
+.form-label
+{
+	font-size: 15px;
+	font-weight: 600;
+	color: #1a1a1a;
+	margin-bottom: 10px;
+	display: block;
+}
+
+.form-control
+{
+	padding: 12px 16px;
+	border: 2px solid #c7bca1;
+	border-radius: 8px;
+	font-family: Georgia, serif;
+	font-size: 14px;
+	color: #1a1a1a;
+	background: rgba(255, 255, 255, 0.8);
+	transition: all 0.3s ease;
+}
+
+.form-control:focus
+{
+	outline: none;
+	border-color: var(--color-accent);
+	background: rgba(255, 255, 255, 1);
+	box-shadow: 0 0 0 3px rgba(212, 255, 0, 0.15);
+}
+
+textarea.form-control
+{
+	resize: vertical;
+	min-height: 120px;
+	font-family: Georgia, serif;
+}
+
+/* Cases Ã  cocher du questionnaire */
+.radio-group
+{
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-bottom: 24px;
+	border: none;
+	padding: 0;
+}
+
+.radio-group label
+{
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-weight: 400;
+	cursor: pointer;
+	margin-bottom: 0;
+}
+
+.radio-group legend
+{
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--color-text);
+	margin-bottom: 14px;
+	padding: 0;
+}
+
+.radio-group input[type="checkbox"],
+.radio-group input[type="radio"]
+{
+	width: 18px;
+	height: 18px;
+	flex-shrink: 0;
+	cursor: pointer;
+	accent-color: var(--color-accent);
+}
+
+/* Bouton d'envoi */
+.form-submit
+{
+	background: var(--color-accent);
+	color: #000;
+	padding: 14px 32px;
+	border: none;
+	border-radius: 8px;
+	font-weight: 600;
+	font-size: 16px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	width: 100%;
+	margin-top: 20px;
+	font-family: Georgia, serif;
+}
+
+.form-submit:hover
+{
+	transform: translateY(-2px);
+	box-shadow: 0 8px 20px rgba(212, 255, 0, 0.3);
+}
+
+.form-submit:active
+{
+	transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px)
+{
+	.contact-form
+	{
+		margin: 40px 20px;
+		padding: 30px 20px;
+	}
+}

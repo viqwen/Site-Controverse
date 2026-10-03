@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact — Controverse</title>
+    <meta name="description" content="Formulaire de contact du site Controverse : posez une question ou faites-nous revenir sur la production de contenu par IA sans supervision humaine.">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Controverse">
+    <meta property="og:title" content="Contact — Controverse">
+    <meta property="og:description" content="Formulaire de contact du site Controverse.">
+
+    <link rel="icon" type="image/png" href="./image/favicon.png">
+
+    <!-- Feuilles de style : feuilles communes, puis feuille de la page -->
+    <link rel="stylesheet" href="./css/menus.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/formulaire.css">
+</head>
+
+<body>
+    <a href="#contenu" class="skip-link">Aller au contenu principal</a>
+
+    <!-- NAVIGATION -->
+    <nav aria-label="Navigation principale">
+        <input type="checkbox" id="mobile-menu" class="nav-checkbox mobile-checkbox">
+
+        <a href="index.html" class="logo"><span>Controverse</span></a>
+
+        <label for="mobile-menu" class="mobile-burger" aria-label="Ouvrir ou fermer le menu de navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <div class="nav-content-wrapper">
+            <div class="nav-menu">
+                <div class="nav-item">
+                    <input type="checkbox" id="menu1" class="nav-checkbox">
+                    <label for="menu1" class="nav-label" aria-label="Ouvrir ou fermer le sommaire de la controverse">Notre controverse</label>
+                    <div class="submenu">
+                        <a href="controverse.html#intro" class="submenu-link">Introduction</a>
+                        <a href="controverse.html#s1" class="submenu-link">Nos sources</a>
+                        <a href="controverse.html#conclusion" class="submenu-link">Conclusion</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="pestel.html" class="nav-link-simple">PESTEL</a>
+                </div>
+                <div class="nav-item">
+                    <a href="timeline.html" class="nav-link-simple">Timeline</a>
+                </div>
+            </div>
+
+            <div class="nav-right">
+                <a href="contact.html" class="contact-btn active" aria-current="page">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="contenu">
+        <h1 class="visually-hidden">Nous contacter</h1>
+
+        <!-- action vide : le formulaire est inactif tant qu'un point de collecte
+     pédagogique n'a pas été renseigné (cf. README). -->
+<form class="contact-form" action="" method="post">
+            <p>
+                <label for="nom" class="form-label">Nom</label>
+                <input id="nom" name="nom" type="text" class="form-control" autocomplete="family-name" required>
+            </p>
+
+            <p>
+                <label for="prenom" class="form-label">Prénom</label>
+                <input id="prenom" name="prenom" type="text" class="form-control" autocomplete="given-name" required>
+            </p>
+
+            <p>
+                <label for="email" class="form-label">Entrez votre email</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="exemple@domaine.com" autocomplete="email" required>
+            </p>
+
+            <p>
+                <label for="pays" class="form-label">Choisissez un pays d’origine&nbsp;:</label>
+                <select name="pays" id="pays" class="form-control" autocomplete="country-name">
+                    <option value="france">France</option>
+                    <option value="suisse">Suisse</option>
+                    <option value="espagne">Espagne</option>
+                    <option value="canada">Canada</option>
+                    <option value="autre">Autre</option>
+                </select>
+            </p>
+
+            <p>
+                <label for="codepostal" class="form-label">Code postal</label>
+                <input id="codepostal" name="codepostal" type="text" inputmode="numeric" pattern="[0-9]{5}" title="5 chiffres requis" class="form-control" autocomplete="postal-code">
+            </p>
+
+            <fieldset class="radio-group">
+                <legend>Vous avez entendu parler de nous via&nbsp;?</legend>
+                <label>
+                    <input type="checkbox" name="connu[]" value="Amis"> Amis</label>
+                <label>
+                    <input type="checkbox" name="connu[]" value="Instagram"> Instagram</label>
+                <label>
+                    <input type="checkbox" name="connu[]" value="Youtube"> YouTube</label>
+                <label>
+                    <input type="checkbox" name="connu[]" value="Intérêt pour le sujet"> Intérêt pour le sujet</label>
+                <label>
+                    <input type="checkbox" name="connu[]" value="Autre"> Autre</label>
+            </fieldset>
+
+            <p>
+                <label for="date" class="form-label">Date à laquelle vous souhaitez être recontacté</label>
+                <input type="date" id="date" name="date" class="form-control">
+            </p>
+
+            <p>
+                <label for="message" class="form-label">Envoyez un message</label>
+                <textarea id="message" name="message" class="form-control" placeholder="Votre message..." rows="6"></textarea>
+            </p>
+
+            <p>
+                <input type="submit" value="Envoyer" class="form-submit">
+            </p>
+        </form>
+    </main>
+
+    <footer class="site-footer">
+        <a href="mentions-legales.html#mentions-legales">Mentions légales</a>
+        <span class="footer-separator" aria-hidden="true">|</span>
+        <a href="mentions-legales.html#donnees-personnelles">Données personnelles</a>
+        <span class="footer-separator" aria-hidden="true">|</span>
+        <a href="mentions-legales.html#cookies">Cookies</a>
+        <span class="footer-separator" aria-hidden="true">|</span>
+        <a href="mentions-legales.html#accessibilite">Accessibilité</a>
+    </footer>
+</body>
+
+</html>

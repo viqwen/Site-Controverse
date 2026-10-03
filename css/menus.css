@@ -1,0 +1,418 @@
+
+/* ==========================================================================
+   BARRE DE NAVIGATION (commune Ã  toutes les pages)
+   Le menu mobile et le sous-menu sont ouverts Ã  l'aide de cases Ã  cocher
+   masquÃ©es (aucun JavaScript n'est utilisÃ© sur ce site).
+   ========================================================================== */
+
+*
+{
+	box-sizing: border-box;
+}
+
+/*NAVIGATION BAR*/
+nav
+{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	padding: 20px 40px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+nav::before
+{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	backdrop-filter: blur(7px);
+	background: var(--color-nav-backdrop);
+}
+
+/* Le logo est l'icÃ´ne du site ; le texte Â« Controverse Â» sert de nom
+   accessible au lien (le texte est masquÃ© visuellement). */
+.logo
+{	
+	width: 80px;  
+	height: 70px;  
+	background-image: url('../image/favicon.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	border-radius: 5px;
+	color: transparent;
+	overflow: hidden;
+}
+
+/* Navigation Menu */
+.nav-menu
+{
+	display: flex;
+	align-items: center;
+	gap: 30px;
+	background: rgba(255, 255, 255, 0.15);
+	padding: 10px 25px;
+	border-radius: 50px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.nav-menu a
+{
+	text-decoration: none;
+	color: var(--color-text);
+	font-size: 14px;
+	font-weight: 500;
+	transition: all 0.3s ease;
+	padding: 6px 12px;
+	border-radius: 6px;
+	position: relative;
+}
+
+.nav-menu a:hover
+{
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-right
+{
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+.contact-btn
+{
+	background: var(--color-accent);
+	color: #000;
+	padding: 10px 24px;
+	border-radius: 50px;
+	border: none;
+	font-weight: 600;
+	font-size: 14px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	transition: all 0.3s ease;
+	text-decoration: none;
+}
+
+.contact-btn:hover
+{
+	transform: translateY(-2px);
+	box-shadow: 0 8px 20px rgba(212, 255, 0, 0.3);
+	color: #000;
+}
+
+.nav-link-simple
+{
+	text-decoration: none;
+	color: var(--color-text);
+	font-size: 14px;
+	font-weight: 500;
+	transition: all 0.3s ease;
+	padding: 6px 12px;
+	border-radius: 6px;
+	display: block;
+}
+
+.nav-link-simple:hover
+{
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-link-simple:active
+{
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-item
+{
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 0;
+}
+
+/* Cases à cocher de la navigation : masquées visuellement mais conservan
+   leur focus clavier (contrairement à display:none), ce qui permet
+   d'ouvrir le sous-menu et le menu mobile sans souris. */
+.nav-checkbox
+{
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+	pointer-events: none;
+}
+
+/* Indicateur de focus sur le libellé correspondant */
+.nav-checkbox:focus-visible ~ .nav-label,
+.mobile-checkbox:focus-visible ~ .mobile-burger
+{
+	outline: 3px solid var(--color-accent);
+	outline-offset: 3px;
+	border-radius: 6px;
+}
+
+.nav-label
+{
+	text-decoration: none;
+	color: var(--color-text);
+	font-size: 14px;
+	font-weight: 500;
+	transition: all 0.3s ease;
+	padding: 6px 12px;
+	border-radius: 6px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+/* Flèche du sous-menu : dessinée avec deux bordures CSS.
+   Aucun caractère spécial n'est utilisé, donc le rendu ne dépend plus
+   de la police ni du jeu de caractères du navigateur.
+   Fermé = chevron pointant à droite, ouvert = chevron pointant vers le bas. */
+.nav-label::after
+{
+	content: "";
+	display: inline-block;
+	flex-shrink: 0;
+	width: 7px;
+	height: 7px;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: rotate(-45deg);
+	transition: transform 0.3s ease;
+}
+
+.nav-label:hover
+{
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-checkbox:checked + .nav-label
+{
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-checkbox:checked + .nav-label::after
+{
+	transform: rotate(90deg);
+}
+
+/* Sous-menus */
+.submenu
+{
+	position: absolute;
+	top: 100%;
+	left: 0;
+	backdrop-filter: blur(7px);
+	border-radius: 8px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	padding: 8px 0;
+	min-width: 100px;
+	display: none;
+	flex-direction: column;
+	gap: 0;
+	margin-top: 12px;
+	z-index: 999;
+}
+
+/* Afficher le submenu quand la checkbox est cochÃ©e */
+.nav-checkbox:checked ~ .submenu
+{
+	display: flex;
+}
+
+.submenu-link
+{
+	text-decoration: none;
+	color: var(--color-text);
+	font-size: 13px;
+	font-weight: 400;
+	padding: 10px 16px;
+	transition: all 0.3s ease;
+	display: block;
+	border-radius: 0;
+}
+
+.submenu-link:hover
+{
+	background: rgba(255, 255, 255, 0.25);
+}
+
+.submenu-link:first-child
+{
+	border-radius: 8px 8px 0 0;
+}
+
+.submenu-link:last-child
+{
+	border-radius: 0 0 8px 8px;
+}
+
+.nav-content-wrapper
+{
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.nav-menu
+{
+	margin: 0 auto;
+}
+
+/* cache du menu burger */
+.mobile-burger
+{
+	display: none;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 900px)
+{
+	nav
+	{
+		padding: 15px 20px;
+	}
+
+	/* LE BOUTON BURGER */
+	.mobile-burger
+	{
+		display: block;
+		cursor: pointer;
+		order: 2;
+		position: absolute;
+		right: 20px;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.mobile-burger span
+	{
+		display: block;
+		width: 25px;
+		height: 3px;
+		background-color: #000;
+		margin: 5px 0;
+		border-radius: 3px;
+		transition: 0.3s;
+	}
+
+	.mobile-checkbox:checked ~ .mobile-burger span:nth-child(1)
+	{
+		transform: rotate(-45deg) translate(-5px, 6px);
+	}
+
+	.mobile-checkbox:checked ~ .mobile-burger span:nth-child(2)
+	{
+		opacity: 0;
+	}
+
+	.mobile-checkbox:checked ~ .mobile-burger span:nth-child(3)
+	{
+		transform: rotate(45deg) translate(-5px, -6px);
+	}
+
+	/* LE MENU DÃ‰ROULANT MOBILE */
+	.nav-content-wrapper
+	{
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 30%;
+		border-radius: 15px;
+		backdrop-filter: blur(7px);
+		box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+		flex-direction: column;
+		padding: 0;
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.3s ease-out;
+		display: flex;
+	}
+
+	.mobile-checkbox:checked ~ .nav-content-wrapper
+	{
+		max-height: 500px;
+		padding-bottom: 20px;
+		transition: max-height 0.4s ease-in;
+	}
+
+	.nav-menu
+	{
+		flex-direction: column;
+		background: transparent;
+		border: none;
+		width: 100%;
+		padding: 0;
+		gap: 0;
+		margin: 0;
+	}
+
+	.nav-item
+	{
+		width: 90%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.nav-link-simple, .nav-label
+	{
+		width: 100%;
+		text-align: center;
+		padding: 15px 0;
+		font-size: 16px;
+	}
+
+	.submenu
+	{
+		position: relative;
+		width: 70%;
+		background: rgba(0, 0, 0, 0.03);
+		border-radius: 10px;
+		margin-top: 5px;
+		text-align: center;
+	}
+
+	.submenu-link
+	{
+		padding: 12px 0;
+		font-size: 15px;
+	}
+
+	.nav-right
+	{
+		margin-top: 20px;
+		display: flex;
+		justify-content: center;
+		width: 100%;
+	}
+}
+
+/* Actif : page courante, signalÃ©e visuellement et via aria-current dans le HTML */
+.nav-link-simple.active,
+.nav-label.active,
+.logo.active 
+{
+    font-weight: bold;
+    border-bottom: 5px solid var(--color-accent);
+}
+
+.contact-btn.active {
+    font-weight: bold;
+	background-color: var(--color-accent);
+}
